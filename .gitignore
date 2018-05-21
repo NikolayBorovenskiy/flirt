@@ -78,5 +78,6 @@ docs/_build/
 
 # PyBuilder
 target/
+src/dating/static/vendor/
 
 !**/static/vendor/**/dist/
