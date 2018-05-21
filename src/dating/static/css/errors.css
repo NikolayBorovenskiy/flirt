@@ -1,0 +1,65 @@
+@font-face {
+    font-family: "Roboto";
+    src: url(../fonts/roboto/Roboto-Regular.ttf);
+}
+
+html {
+    font-size: 10px;
+}
+
+body {
+    font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+    background: #f8f8f8;
+    color: #474747;
+}
+
+.container {
+    padding: 80px 50px;
+    text-align: center;
+}
+
+.container__item {
+    margin-bottom: 60px;
+}
+
+.error {
+}
+
+.error__code {
+    font-size: 4.8rem;
+    font-weight: bold;
+}
+
+.error__short-text {
+    font-size: 3.6rem;
+}
+
+.error__help {
+    font-size: 2rem;
+    padding: 0 25%;
+}
+
+.navigation {
+    font-size: 2.4rem;
+}
+
+.navigation__item {
+    text-decoration: none;
+    color: #474747;
+    border-bottom: 1px dashed #474747;
+    padding-bottom: 2px;
+    cursor: pointer;
+}
+.navigation__item:hover, .navigation__item:visited {
+    color: #474747;
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    .container {
+        padding: 30px 10px;
+    }
+
+    .error__help {
+        padding: 0 10px;
+    }
+}

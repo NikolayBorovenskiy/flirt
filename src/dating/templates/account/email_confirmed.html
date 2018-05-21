@@ -1,0 +1,21 @@
+{% extends "account/base.html" %}
+
+{% load account %}
+
+{% block head_title %}Подтверждение электронной почты{% endblock %}
+
+
+{% block content %}
+
+    <h1>Подтверждение электронной почты</h1>
+
+    {% user_display confirmation.email_address.user as user_display %}
+
+    <p>
+        {% with confirmation.email_address.email as email %}
+            Вы подтвердили что адрес <a href="mailto:{{email}}">{{ email }}</a>
+            принадлежит пользователю {{ user_display }}.
+        {% endwith %}
+    </p>
+
+{% endblock %}

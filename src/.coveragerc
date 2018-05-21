@@ -1,0 +1,11 @@
+[run]
+omit =
+    */tests/*
+    */manage.py
+    */migrations/*
+    */settings/*
+    */wsgi.py
+
+[report]
+show_missing = True
+skip_covered = True

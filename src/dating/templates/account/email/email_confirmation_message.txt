@@ -1,0 +1,7 @@
+{% load account %}{% user_display user as user_display %}{% autoescape off %}{% with current_site.name as site_name %}
+Пользователь {{ user_display }} на сайте {{ site_name }} указал этот адрес электронной почты при регистрации.
+
+Чтобы подтвердить регистрацию, пожалуйста, перейдите по ссылке {{ activate_url }}.
+
+Если вы получили письмо случайно, то это письмо можно проигнорировать.
+{% endwith %}{% endautoescape %}

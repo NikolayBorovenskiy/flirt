@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+
+{% block head_title %}
+    {{ flatpage.title }}
+{% endblock %}
+
+
+{% block content %}
+    {{ flatpage.content|safe }}
+{% endblock %}

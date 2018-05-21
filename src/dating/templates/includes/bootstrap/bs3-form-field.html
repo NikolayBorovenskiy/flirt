@@ -1,0 +1,25 @@
+{% load widget_tweaks %}
+
+<div class="form-group{% if field.errors %} has-error{% endif %}">
+    {% if not hide_label %}
+        <label{% if field.field.required %} class="required"{% endif %} for="{{ field.id_for_label }}">
+            {{ field.label }}
+        </label>
+    {% endif %}
+
+    {{ field|add_class:"form-control" }}
+
+    {% if field.errors %}
+        <div class="field-errors">
+            {% for error in field.errors %}
+                <div class="field-errors-item"><span
+                        class="glyphicon glyphicon-exclamation-sign"></span> {{ error }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% if field.help_text %}
+        <p class="help-block">
+            {{ field.help_text }}
+        </p>
+    {% endif %}
+</div>

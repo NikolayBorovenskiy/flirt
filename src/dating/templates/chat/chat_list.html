@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-4" id="j-threads">
+            {% for thread in threads %}
+                <a href="#" class="chatperson" data-uuid="{{ thread.uuid }}">
+                    {% for member in thread.members.all %}
+                        {% if request.user.pk != member.pk %}
+                            <span class="chatimg">
+                                <img src="{{ member.avatar.url }}"
+                                     alt=""/>
+                            </span>
+                            <div class="namechat">
+                                <div class="pname">{{ member.last_name }} {{ member.first_name }}</div>
+                                <div class="lastmsg">{{ thread.last_message.content }}</div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </a>
+            {% endfor %}
+        </div>
+        <div class="col-sm-8" id="j-messages">
+            <div class="chatbody j-chatbody">
+            </div>
+            <div class="row j-control">
+                <div class="col-xs-9">
+                    <input type="text" placeholder="Сообщение..."
+                           class="form-control"/>
+                </div>
+                <div class="col-xs-3">
+                    <a class="btn btn-info btn-block">Send</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

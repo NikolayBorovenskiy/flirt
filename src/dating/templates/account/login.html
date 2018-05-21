@@ -1,0 +1,37 @@
+{% extends "account/base.html" %}
+
+{% load account %}
+
+{% block head_title %}Вход{% endblock %}
+
+{% block content %}
+
+<h1>Вход</h1>
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <form class="form" method="POST" action="{% url 'account_login' %}">
+                {% csrf_token %}
+
+                {% include "includes/bootstrap/bs3-form.html" %}
+
+                {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit">Войти</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <p>
+        Забыли пароль? <a href="{% url 'account_reset_password' %}">Нажмите здесь, чтобы восстановить.</a>
+    </p>
+    <p>
+        Ещё нет учётной записи? <a href="{{ signup_url }}">Зарегистрируйтесь</a>
+    </p>
+
+{% endblock %}

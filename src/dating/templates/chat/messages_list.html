@@ -1,0 +1,11 @@
+<table class="table">
+    {% for message in messages %}
+    <tr>
+        <td><img class="img-responsive" src="{{ message.author.avatar.url }}"/>
+        </td>
+        <td>{{ message.content }}
+        </td>
+        <td>{{ message.updated | date }}</td>
+    </tr>
+    {% endfor %}
+</table>

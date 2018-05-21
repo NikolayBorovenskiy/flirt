@@ -1,0 +1,83 @@
+<div class="row">
+    {% for obj in instances %}
+        {% if not obj.is_staff and request.user.pk != obj.pk %}
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="image-flip"
+                     ontouchstart="this.classList.toggle('hover');">
+                    <div class="mainflip">
+                        <div class="frontside">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <p><img class=" img-fluid"
+                                            src="{{ obj.avatar.url }}"
+                                            alt="{{ obj.first_name }}">
+                                    </p>
+                                    <h4 class="card-title">{{ obj.last_name }} {{ obj.first_name }}</h4>
+                                    <h5 class="card-title">{{ obj.country }}</h5>
+                                    <h5 class="card-title">{{ obj.date_of_birth | age }}</h5>
+                                    <h5 class="card-title">{{ obj.job }}</h5>
+                                    <h5 class="card-title">{{ obj.university }}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="backside">
+                            <div class="card">
+                                <div class="card-body text-center mt-4">
+                                    <p class="card-text">{{ obj.bio  | striptags | safe | truncatechars:220 }}</p>
+                                    <ul class="list-inline">
+                                        <li class="list-inline-item">
+                                            <a class="social-icon text-xs-center"
+                                               target="_blank"
+                                               href="{{ obj.facebook }}">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a class="social-icon text-xs-center"
+                                               target="_blank"
+                                               href="{{ obj.twitter }}">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a class="social-icon text-xs-center"
+                                               target="_blank"
+                                               href="{{ obj.instagram }}">
+                                                <i class="fa fa-instagram"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    {% if user.is_authenticated %}
+                                        <div class="card-buttons"
+                                             data-email="{{ obj.email }}">
+                                            {% if obj.id not in user_bookmarks_ids %}
+                                                <button class="j-members_bookmark btn btn-primary btn-sm"
+                                                        type="button">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            {% endif %}
+                                            <button class="j-members_message btn btn-primary btn-sm"
+                                                    type="button">
+                                                <i class="fa fa-envelope"></i>
+                                            </button>
+                                        </div>
+                                    {% endif %}
+                                    <ul class="list-inline">
+                                        {% if obj.id in user_bookmarks_ids %}
+                                            <li class="list-inline-item">
+                                                <span>Ваша закладка</span>
+                                            </li>
+                                        {% endif %}
+                                        <a href="{{ obj.get_absolute_url }}">Перейти в профиль
+                                        </a>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% cycle "" "" "</div><div class='row'>" %}
+        {% endif %}
+    {% endfor %}
+</div>

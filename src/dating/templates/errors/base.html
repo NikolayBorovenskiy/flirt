@@ -1,0 +1,38 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>{% block meta_title %}{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/errors.css' %}">
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="error">
+            <div class="error__code container__item">
+                {% block code %}{% endblock %}
+            </div>
+
+            <div class="error__short-text container__item">
+                {% block short_text %}{% endblock %}
+            </div>
+
+            <div class="error__help container__item">
+                {% block help %}{% endblock %}
+            </div>
+        </div>
+
+        <div class="navigation">
+            {% block navigation %}
+                <a class="navigation__item" href="/">Перейти на главную страницу сайта</a>
+            {% endblock %}
+        </div>
+    </div>
+
+</body>
+</html>

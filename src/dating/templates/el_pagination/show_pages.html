@@ -1,0 +1,14 @@
+<ul class="pagination">
+    {% for page in pages %}
+        <li {% if not page.label %}class="disabled"{% endif %}
+            {% if page.is_current %}class="active"{% endif %}>
+                <a href="{{ page.path }}">
+                    {% if page.label %}
+                        {{ page.label|safe }}
+                    {% else %}
+                        ...
+                    {% endif %}
+                </a>
+        </li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,111 @@
+{% load static account cmstemplates_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="57x57"
+          href="{% static 'images/favicon/apple-icon-57x57.png' %}">
+    <link rel="apple-touch-icon" sizes="60x60"
+          href="{% static 'images/favicon/apple-icon-60x60.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72"
+          href="{% static 'images/favicon/apple-icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="76x76"
+          href="{% static 'images/favicon/apple-icon-76x76.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114"
+          href="{% static 'images/favicon/apple-icon-114x114.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120"
+          href="{% static 'images/favicon/apple-icon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="144x144"
+          href="{% static 'images/favicon/apple-icon-144x144.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152"
+          href="{% static 'images/favicon/apple-icon-152x152.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180"
+          href="{% static 'images/favicon/apple-icon-180x180.png' %}">
+    <link rel="icon" type="image/png" sizes="192x192"
+          href="{% static 'images/favicon/android-icon-192x192.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16"
+          href="{% static 'images/favicon/favicon-16x16.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32"
+          href="{% static 'images/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="96x96"
+          href="{% static 'images/favicon/favicon-96x96.png' %}">
+
+    <meta name="msapplication-TileImage"
+          content="{% static 'images/favicon/ms-icon-144x144.png' %}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+
+    <title>
+        {% block head_title %}Title{% endblock %}
+    </title>
+
+    {% if debug %}
+        <link rel="stylesheet"
+              href="{% static "build/bundle.css" %}?ver={% file_version 'build/bundle.css' %}"/>
+    {% else %}
+        <link rel="stylesheet"
+              href="{% static "build/bundle.min.css" %}?ver={% file_version 'build/bundle.min.css' %}"/>
+    {% endif %}
+</head>
+
+<body>
+<nav class="navbar navbar-fixed-top navbar-inverse" id="header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'home' %}">Flirt</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            {% if request.user.is_authenticated %}
+                <ul class="nav navbar-nav">
+                    <li class='{% is_view view_name="home" %}'><a href="{% url 'home' %}">Гланая</a></li>
+                    <li class='{% is_view namespace="accounts" view_name="profile"  %}'><a href="{% url 'accounts:profile' 'self' %}">Профиль</a></li>
+                    <li class='{% is_view namespace="chat" %}' id="j-total-notifications"><a href="{% url 'chat:list-view' %}">Сообщения <span class="badge">4</span></a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active">
+                        <form class="form-inline" method="post" action="{% url 'account_logout' %}">
+                            {% csrf_token %}
+                            <input class="btn btn-link" type="submit" value="Выход">
+                        </form>
+                    </li>
+                </ul>
+             {% else %}
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{% url 'account_login' %}">Вход</a></li>
+                    <li><a href="{% url 'account_signup' %}">Регистрация</a></li>
+                </ul>
+            {% endif %}
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</nav><!-- /.navbar -->
+
+<div class="container">
+    {% include "includes/bootstrap/messages.html" %}
+    {% block content %}{% endblock %}
+    <hr>
+    <footer>
+        <p><script>document.write(new Date().getFullYear())</script>{{ contacts.school }} Велерий Пономаренко, ХАИ</p>
+    </footer>
+</div><!--/.container-->
+
+<script src="{% static 'build/vendor.js' %}"></script>
+<script src="{% static 'build/app.js' %}"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function() {
+        {% block jquery %}
+        {% endblock %}
+    });
+</script>
+</body>
+</html>

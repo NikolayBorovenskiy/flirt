@@ -1,0 +1,152 @@
+{% extends "account/base.html" %}
+{{ instance }}
+{% block content %}
+    <div class="well well-light well-sm no-margin no-padding">
+
+        <div class="row">
+
+            <div class="col-sm-12">
+                <div id="myCarousel" class="carousel fade profile-carousel">
+                    <div class="air air-bottom-right padding-10">
+                        <a href="javascript:void(0);"
+                           class="btn txt-color-white bg-color-teal btn-sm"><i
+                                class="fa fa-check"></i> Follow</a>&nbsp; <a
+                            href="javascript:void(0);"
+                            class="btn txt-color-white bg-color-pinkDark btn-sm"><i
+                            class="fa fa-link"></i> Connect</a>
+                    </div>
+                    <div class="air air-top-left padding-10">
+                        <h4 class="txt-color-white font-md">Jan 1, 2014</h4>
+                    </div>
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0"
+                            class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"
+                            class=""></li>
+                        <li data-target="#myCarousel" data-slide-to="2"
+                            class=""></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <!-- Slide 1 -->
+                        <div class="item active">
+                            <img src="img/demo/s1.jpg" alt="demo user">
+                        </div>
+                        <!-- Slide 2 -->
+                        <div class="item">
+                            <img src="img/demo/s2.jpg" alt="demo user">
+                        </div>
+                        <!-- Slide 3 -->
+                        <div class="item">
+                            <img src="img/demo/m3.jpg" alt="demo user">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12">
+
+                <div class="row">
+
+                    <div class="col-sm-3 profile-pic">
+                        <img class="img-responsive"
+                             src="{{ instance.avatar.url }}" alt="user">
+                    </div>
+                    <div class="col-sm-6">
+                        <h1>{{ instance.first_name }} <span
+                                class="semi-bold">{{ instance.last_name }}</span>
+                            <br>
+                            <small> CEO, SmartAdmin</small>
+                        </h1>
+
+                        <ul class="list-unstyled">
+                            <li>
+                                <p class="text-muted">
+                                    <i class="fa fa-phone"></i>&nbsp;&nbsp;(<span
+                                        class="txt-color-darken">313</span>)
+                                    <span
+                                            class="txt-color-darken">464</span>
+                                    - <span
+                                        class="txt-color-darken">6473</span>
+                                </p>
+                            </li>
+                            <li>
+                                <p class="text-muted">
+                                    <i class="fa fa-envelope"></i>&nbsp;&nbsp;<a
+                                        href="mailto:simmons@smartadmin">{{ instance.email }}</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p class="text-muted">
+                                    <i class="fa fa-skype"></i>&nbsp;&nbsp;<span
+                                        class="txt-color-darken">john12</span>
+                                </p>
+                            </li>
+                            <li>
+                                <p class="text-muted">
+                                    <i class="fa fa-calendar"></i>&nbsp;&nbsp;<span
+                                        class="txt-color-darken">Free after <a
+                                        href="javascript:void(0);" rel="tooltip"
+                                        title="" data-placement="top"
+                                        data-original-title="Create an Appointment">4:30 PM</a></span>
+                                </p>
+                            </li>
+                        </ul>
+                        <br>
+                        <p class="font-md">
+                            <i>A little about me...</i>
+                        </p>
+                        <p>{{ instance.bio | safe }}</p>
+                        <br>
+                        {% if user.pk != instance.pk %}
+                        <a href="javascript:void(0);"
+                           class="btn btn-default btn-xs"><i
+                                class="fa fa-envelope-o"></i> Send Message
+                        </a>
+                        {% endif %}
+                        <br>
+                        <br>
+
+                    </div>
+                    <div class="col-sm-3">
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if user.pk == instance.pk %}
+            <div class="row">
+                <div class="col-sm-12">
+                    <hr>
+                    <div class="padding-10">
+                        <ul class="nav nav-tabs tabs-pull-right">
+                            <li>
+                                <a href="#a1" data-toggle="tab">Мои закладки</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content padding-top-10">
+                            <div class="tab-pane fade" id="a1">
+                                {% for bookmark in bookmarks %}
+                                    <div class="user" title="email@company.com">
+                                        <img src="{{ bookmark.avatar.url }}"
+                                             alt="demo user"><a
+                                            href="javascript:void(0);">{{ bookmark.first_name }}
+                                        {{ bookmark.last_name }}</a>
+                                        <div class="email">
+                                            {{ bookmark.email }}
+                                        </div>
+                                    </div>
+                                {% empty %}
+                                    <p>Нет закладок</p>
+                                {% endfor %}
+                            </div><!-- end tab -->
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        {% endif %}
+        <!-- end row -->
+
+    </div>
+{% endblock %}

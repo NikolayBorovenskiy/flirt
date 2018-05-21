@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row row-offcanvas row-offcanvas-right">
+        <div id="j-filter" class="filter col-md-3">
+            <form role="search">
+                <div class="form-group">
+                    <input type="text"
+                           class="form-control j-search_widget"
+                           placeholder="Search"
+                           data-toggle="tooltip"
+                           data-placement="right"
+                           title="Type name of member">
+                </div>
+            </form>
+            <ul class="nav nav-pills nav-stacked">
+                <li class="nav-header">
+                    <i class="glyphicon glyphicon-remove j-filter_clear"
+                       data-by="gender"></i>
+                    <a href="#">Пол</a>
+                </li>
+                <li>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li>
+                            <a href="#" data-by="gender"
+                               data-value="f">Девушки</a>
+                        </li>
+                        <li>
+                            <a href="#" data-by="gender" data-value="m">Парни</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav nav-pills nav-stacked">
+                <li class="nav-header">
+                    <i class="glyphicon glyphicon-remove j-filter_clear"
+                       data-by="age"></i>
+                    <a href="#">Возраст</a>
+                </li>
+                <li>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li>
+                            <a href="#" data-by="age" data-value="0-18">меньше
+                                18 лет</a>
+                        </li>
+                        <li>
+                            <a href="#" data-by="age" data-value="18-25">18-25
+                                лет</a>
+                        </li>
+                        <li>
+                            <a href="#" data-by="age" data-value="25-30">25-30
+                                лет</a>
+                        </li>
+                        <li>
+                            <a href="#" data-by="age" data-value="30-150">больше
+                                30 лет</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-9 j-members" data-filtered="true">
+            {% if not request.user.is_authenticated %}
+                <div class="jumbotron">
+                    <h1>Hello, world!</h1>
+                    <p>This is an example to show the potential of an offcanvas
+                        layout pattern in Bootstrap. Try some responsive-range
+                        viewport sizes to see it in action.</p>
+                </div>
+            {% endif %}
+            <!-- Team -->
+            <section id="team" class="pb-5 j-members_list">
+                {% include 'members.html' with instances=object_list %}
+            </section>
+            <!-- Team -->
+
+
+        </div><!--/.col-xs-12.col-sm-9-->
+    </div><!--/row-->
+{% endblock content %}
