@@ -1,0 +1,26 @@
+celery
+dj-database-url
+django==1.10
+django-allauth==0.27
+django-ckeditor
+django-cleanup
+django-cmstemplates
+django-codemirror-widget
+django-el-pagination
+django-widget-tweaks
+easy-thumbnails
+envvars
+hiredis
+ipython
+lxml  # libxml2-dev libxslt-dev
+pillow  # libjpeg8 libjpeg8-dev libfreetype6 libfreetype6-dev zlib1g-dev
+psycopg2  # libpq-dev
+pymorphy2-dicts-ru
+pymorphy2[fast]
+pytils
+redis
+rules
+unidecode==1.0
+django-countries
+fabric==2.0.1
+tornado==4.4.2
