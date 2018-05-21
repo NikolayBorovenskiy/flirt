@@ -1,0 +1,32 @@
+[uwsgi]
+project_dir = %d
+
+virtualenv = %(project_dir)env
+pythonpath = .
+
+chdir = %(project_dir)src
+module = dating.wsgi:application
+
+pidfile = %(project_dir)var/pid/uwsgi.pid
+socket = %(project_dir)var/run/uwsgi.sock
+chmod-socket = 666
+
+thunder-lock = true
+
+workers = 3
+master = true
+
+touch-reload = %(project_dir)var/reload
+touch-logrotate = %(project_dir)var/rotate
+
+max-requests = 4000
+harakiri = 120
+harakiri-verbose = true
+
+ignore-sigpipe = 1
+vacuum = true
+#reaper = 1
+
+disable-logging = true
+log-format-strftime = 1
+log-date =

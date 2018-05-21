@@ -1,0 +1,16 @@
+DJANGO_SETTINGS_MODULE=dating.settings.local_nikolayborovenskiy
+
+DJANGO_SECRET='CHANGE_ME_IN_PRODUCTION'
+
+DJANGO_DB='postgres://USER:PASSWORD@HOST:PORT/NAME'
+
+DJANGO_FROM_EMAIL='nikolay.borovenskiy@gmail.com'
+DJANGO_EMAIL_HOST='smtp.gmail.com'
+DJANGO_EMAIL_PORT=587
+DJANGO_EMAIL_USER='nikolay.borovenskiy@gmail.com'
+DJANGO_EMAIL_PASSWORD='acmilan1899acmilan'
+DJANGO_EMAIL_USE_TLS=True
+DJANGO_EMAIL_USE_SSL=False
+
+CELERY_BROKER_URL = 'redis://localhost/8'
+CELERY_RESULT_BACKEND = 'redis://localhost/7'

@@ -1,0 +1,70 @@
+[inet_http_server]
+port = 127.0.0.1:10000
+
+[unix_http_server]
+file = %(here)s/var/run/supervisor.sock
+chmod = 0666
+
+[supervisord]
+logfile = %(here)s/var/log/supervisord.log
+pidfile = %(here)s/var/pid/supervisord.pid
+logfile_maxbytes = 50MB
+logfile_backups = 10
+loglevel = warn
+nodaemon = false
+identifier = str
+
+[supervisorctl]
+serverurl = unix://%(here)s/var/run/supervisor.sock
+history_file = %(here)s/var/supervisorctl_history
+
+[program:uwsgi]
+command = uwsgi --ini %(here)s/uwsgi.ini
+stdout_logfile = %(here)s/var/log/uwsgi.log
+stdout_logfile_maxbytes = 1MB
+stdout_logfile_backups = 10
+stderr_logfile = %(here)s/var/log/uwsgi_err.log
+stderr_logfile_maxbytes = 1MB
+stderr_logfile_backups = 10
+autorestart = true
+stopsignal = INT
+
+[program:gunicorn]
+command=gunicorn --access-logfile=var/log/gunicorn_access.logfile
+        --error-logfile=var/log/gunicorn_error.log
+        -k gevent
+        --max-requests=3000
+        --workers=4
+        --bind=0.0.0.0:8081
+        dating.wsgi:application
+stdout_logfile=%(here)s/var/log/gunicorn.log
+stderr_logfile=%(here)s/var/log/gunicorn_err.log
+autorestart=true
+
+[program:celery]
+command = %(here)s/env/bin/celery worker --app=dating -O fair -l info
+stdout_logfile = %(here)s/var/log/celery.log
+stdout_logfile_maxbytes = 1MB
+stdout_logfile_backups = 10
+stderr_logfile = %(here)s/var/log/celery_err.log
+stderr_logfile_maxbytes = 1MB
+stderr_logfile_backups = 10
+numprocs = 1
+autorestart = true
+stopsignal = INT
+
+[program:elastic]
+command = elasticsearch/bin/elasticsearch
+directory = %(here)s
+stdout_logfile = %(here)s/var/log/elasticsearch.log
+stdout_logfile_maxbytes = 1MB
+stdout_logfile_backups = 10
+stderr_logfile = %(here)s/var/log/elasticsearch_err.log
+stderr_logfile_maxbytes = 1MB
+stderr_logfile_backups = 10
+numprocs = 1
+autorestart = true
+stopsignal = INT
+
+[rpcinterface:supervisor]
+supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
