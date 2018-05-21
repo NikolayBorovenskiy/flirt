@@ -1,0 +1,16 @@
+{
+  "chunks": {
+    "vendor": [
+      "jquery",
+      "jquery-cookie",
+      "lodash",
+      "sockjs-client"
+    ]
+  },
+  "paths": {
+    "jquery": "src/dating/static/vendor/jquery/dist/jquery.min.js",
+    "jquery-cookie": "src/dating/static/vendor/jquery-cookie/jquery.cookie.js",
+    "lodash": "src/dating/static/vendor/lodash/lodash.min.js",
+    "sockjs-client": "src/dating/static/vendor/sockjs-client/dist/sockjs.min.js"
+  }
+}

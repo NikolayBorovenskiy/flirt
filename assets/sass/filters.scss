@@ -1,0 +1,15 @@
+.filter {
+  .nav > li.nav-header > a,
+  .nav > li.nav-header > a:hover {
+    color: #fff;
+    background-color: #145271;
+    cursor: default;
+  }
+
+  .nav-header .glyphicon-remove {
+    cursor: pointer;
+    position: absolute;
+    left: -20px;
+    top: 13px;
+  }
+}

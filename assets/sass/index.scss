@@ -1,0 +1,17 @@
+@import "bootstrap-sass/assets/stylesheets/bootstrap";
+@import "offcanvas";
+@import "filters";
+@import "header";
+@import "home";
+@import "messages";
+
+.unread{
+  background-color: #acd8a8;
+}
+#j-total-notifications{
+  a{
+    span{
+      background-color: #dc8009;
+    }
+  }
+}
