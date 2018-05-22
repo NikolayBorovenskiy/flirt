@@ -67,7 +67,6 @@
         <div id="navbar" class="collapse navbar-collapse">
             {% if request.user.is_authenticated %}
                 <ul class="nav navbar-nav">
-                    <li class='{% is_view view_name="home" %}'><a href="{% url 'home' %}">Гланая</a></li>
                     <li class='{% is_view namespace="accounts" view_name="profile"  %}'><a href="{% url 'accounts:profile' 'self' %}">Профиль</a></li>
                     <li class='{% is_view namespace="chat" %}' id="j-total-notifications"><a href="{% url 'chat:list-view' %}">Сообщения <span class="badge">4</span></a></li>
                 </ul>
