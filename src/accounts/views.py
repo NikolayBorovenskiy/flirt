@@ -4,7 +4,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 
 from accounts.forms import UserChangeForm
-from core.serializers import serialize_model, user as serialize_user
+from bookmarks.models import Bookmark
+from core.serializers import user as serialize_user
 from .models import DatingUser
 
 
@@ -33,6 +34,11 @@ def profile(request, slug=None):
         context['bookmarks'] = bookmarks
     else:
         instance = get_object_or_404(DatingUser, slug=slug)
+        my_bookmarks = Bookmark.objects.filter(
+            owner__email=request.user,
+            marked_user_id=instance.id
+        )
+        context['is_bookmark'] = True if my_bookmarks.count() else False
     context['instance'] = instance
 
     return render(request, 'account/profile.html', context)

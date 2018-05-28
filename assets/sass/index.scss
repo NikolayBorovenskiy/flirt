@@ -4,14 +4,59 @@
 @import "header";
 @import "home";
 @import "messages";
+@import "profile";
 
-.unread{
+body {
+  font-family: "Open Sans", Arial, Helvetica, Sans-Serif;
+}
+
+h1 {
+  font-weight: 300;
+}
+
+.unread {
   background-color: #acd8a8;
 }
-#j-total-notifications{
-  a{
-    span{
+
+#j-total-notifications {
+  a {
+    span {
       background-color: #dc8009;
     }
+  }
+}
+
+.fade {
+  opacity: 0;
+  -webkit-transition: opacity .15s linear;
+  -moz-transition: opacity .15s linear;
+  -o-transition: opacity .15s linear;
+  transition: opacity .15s linear
+}
+
+.carousel.fade {
+  opacity: 1;
+}
+
+.semi-bold {
+  font-weight: 400 !important;
+}
+
+.txt-color-darken {
+  color: #404040 !important;
+}
+
+.padding-10 {
+  padding: 10px !important;
+}
+
+.padding-top-10 {
+  padding-top: 10px !important;
+}
+
+.navbar-nav > li{
+  input[type='submit']{
+    padding-top: 15px;
+    padding-bottom: 15px;
   }
 }

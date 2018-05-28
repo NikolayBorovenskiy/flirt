@@ -1,23 +1,30 @@
-{% extends "account/base.html" %}
-{{ instance }}
+{% extends "base.html" %}
+{% load staticfiles %}
 {% block content %}
-    <div class="well well-light well-sm no-margin no-padding">
+    <div class="well well-light well-sm no-margin no-padding j-members">
 
         <div class="row">
 
             <div class="col-sm-12">
                 <div id="myCarousel" class="carousel fade profile-carousel">
-                    <div class="air air-bottom-right padding-10">
-                        <a href="javascript:void(0);"
-                           class="btn txt-color-white bg-color-teal btn-sm"><i
-                                class="fa fa-check"></i> Follow</a>&nbsp; <a
-                            href="javascript:void(0);"
-                            class="btn txt-color-white bg-color-pinkDark btn-sm"><i
-                            class="fa fa-link"></i> Connect</a>
+                    <div class="air air-bottom-right padding-10"
+                         data-email="{{ instance.email }}">
+                        {% if user.pk != instance.pk %}
+                            {% if not is_bookmark %}
+                                <button type="button"
+                                        class="j-members_bookmark btn txt-color-white bg-color-teal btn-sm">
+                                    <i class="fa fa-check"></i> Bookmark
+                                </button>
+                            {% endif %}
+                        {% else %}
+                            <a href="{% url 'accounts:edit' %}"
+                               class="btn txt-color-white bg-color-pinkDark btn-sm">
+                                <i class="fa fa-edit"></i> Edit</a>
+                        {% endif %}
                     </div>
-                    <div class="air air-top-left padding-10">
-                        <h4 class="txt-color-white font-md">Jan 1, 2014</h4>
-                    </div>
+                    {#                    <div class="air air-top-left padding-10">#}
+                    {#                        <h4 class="txt-color-white font-md">Jan 1, 2014</h4>#}
+                    {#                    </div>#}
                     <ol class="carousel-indicators">
                         <li data-target="#myCarousel" data-slide-to="0"
                             class="active"></li>
@@ -29,15 +36,18 @@
                     <div class="carousel-inner">
                         <!-- Slide 1 -->
                         <div class="item active">
-                            <img src="img/demo/s1.jpg" alt="demo user">
+                            <img src="{% static 'img/s1.jpg' %}"
+                                 alt="demo user">
                         </div>
                         <!-- Slide 2 -->
                         <div class="item">
-                            <img src="img/demo/s2.jpg" alt="demo user">
+                            <img src="{% static 'img/s2.jpg' %}"
+                                 alt="demo user">
                         </div>
                         <!-- Slide 3 -->
                         <div class="item">
-                            <img src="img/demo/m3.jpg" alt="demo user">
+                            <img src="{% static 'img/s3.jpg' %}"
+                                 alt="demo user">
                         </div>
                     </div>
                 </div>
@@ -55,20 +65,10 @@
                         <h1>{{ instance.first_name }} <span
                                 class="semi-bold">{{ instance.last_name }}</span>
                             <br>
-                            <small> CEO, SmartAdmin</small>
+                            <small> {{ instance.country.name }}, {{ instance.date_of_birth | age }}</small>
                         </h1>
 
                         <ul class="list-unstyled">
-                            <li>
-                                <p class="text-muted">
-                                    <i class="fa fa-phone"></i>&nbsp;&nbsp;(<span
-                                        class="txt-color-darken">313</span>)
-                                    <span
-                                            class="txt-color-darken">464</span>
-                                    - <span
-                                        class="txt-color-darken">6473</span>
-                                </p>
-                            </li>
                             <li>
                                 <p class="text-muted">
                                     <i class="fa fa-envelope"></i>&nbsp;&nbsp;<a
@@ -77,17 +77,37 @@
                             </li>
                             <li>
                                 <p class="text-muted">
-                                    <i class="fa fa-skype"></i>&nbsp;&nbsp;<span
-                                        class="txt-color-darken">john12</span>
+                                    <i class="fa fa-twitter"></i>&nbsp;&nbsp;<span
+                                        class="txt-color-darken">
+                                    <a target="_blank"
+                                       href="{{ instance.twitter }}">{{ instance.twitter }}</a>
+                                </span>
                                 </p>
                             </li>
                             <li>
                                 <p class="text-muted">
-                                    <i class="fa fa-calendar"></i>&nbsp;&nbsp;<span
-                                        class="txt-color-darken">Free after <a
-                                        href="javascript:void(0);" rel="tooltip"
-                                        title="" data-placement="top"
-                                        data-original-title="Create an Appointment">4:30 PM</a></span>
+                                    <i class="fa fa-facebook"></i>&nbsp;&nbsp;<span
+                                        class="txt-color-darken">
+                                    <a target="_blank"
+                                       href="{{ instance.facebook }}">{{ instance.facebook }}</a>
+                                </span>
+                                </p>
+                            </li>
+                            <li>
+                                <p class="text-muted">
+                                    <i class="fa fa-instagram"></i>&nbsp;&nbsp;<span
+                                        class="txt-color-darken">
+                                    <a target="_blank"
+                                       href="{{ instance.instagram }}">{{ instance.instagram }}</a>
+                                </span>
+                                </p>
+                            </li>
+                            <li>
+                                <p class="text-muted">
+                                    <i class="fa fa-calendar"></i>&nbsp;&nbsp;
+                                    <span class="txt-color-darken">Join
+                                        {{ instance.date_joined | date }}
+                                    </span>
                                 </p>
                             </li>
                         </ul>
@@ -98,10 +118,13 @@
                         <p>{{ instance.bio | safe }}</p>
                         <br>
                         {% if user.pk != instance.pk %}
-                        <a href="javascript:void(0);"
-                           class="btn btn-default btn-xs"><i
-                                class="fa fa-envelope-o"></i> Send Message
-                        </a>
+                            <div data-email="{{ instance.email }}">
+                                <a href="javascript:void(0);"
+                                   class="j-members_message btn btn-default btn-xs">
+                                    <i class="fa fa-envelope-o"></i> Send
+                                    Message
+                                </a>
+                            </div>
                         {% endif %}
                         <br>
                         <br>
@@ -118,18 +141,17 @@
                     <hr>
                     <div class="padding-10">
                         <ul class="nav nav-tabs tabs-pull-right">
-                            <li>
+                            <li class="active">
                                 <a href="#a1" data-toggle="tab">Мои закладки</a>
                             </li>
                         </ul>
                         <div class="tab-content padding-top-10">
-                            <div class="tab-pane fade" id="a1">
+                            <div class="tab-pane fade in active" id="a1">
                                 {% for bookmark in bookmarks %}
-                                    <div class="user" title="email@company.com">
+                                    <div class="user">
                                         <img src="{{ bookmark.avatar.url }}"
-                                             alt="demo user"><a
-                                            href="javascript:void(0);">{{ bookmark.first_name }}
-                                        {{ bookmark.last_name }}</a>
+                                             alt="demo user">
+                                        <a href="{{ bookmark.get_absolute_url }}">{{ bookmark.first_name }} {{ bookmark.last_name }}</a>
                                         <div class="email">
                                             {{ bookmark.email }}
                                         </div>
@@ -139,14 +161,10 @@
                                 {% endfor %}
                             </div><!-- end tab -->
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
         {% endif %}
         <!-- end row -->
-
     </div>
 {% endblock %}

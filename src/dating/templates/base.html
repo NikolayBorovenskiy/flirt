@@ -1,4 +1,4 @@
-{% load static account cmstemplates_tags %}
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,8 +48,8 @@
         <link rel="stylesheet"
               href="{% static "build/bundle.min.css" %}?ver={% file_version 'build/bundle.min.css' %}"/>
     {% endif %}
+    <link rel="stylesheet" href="{% static 'flags/sprite.css' %}">
 </head>
-
 <body>
 <nav class="navbar navbar-fixed-top navbar-inverse" id="header">
     <div class="container">
@@ -67,22 +67,31 @@
         <div id="navbar" class="collapse navbar-collapse">
             {% if request.user.is_authenticated %}
                 <ul class="nav navbar-nav">
-                    <li class='{% is_view view_name="home" %}'><a href="{% url 'home' %}">Гланая</a></li>
-                    <li class='{% is_view namespace="accounts" view_name="profile"  %}'><a href="{% url 'accounts:profile' 'self' %}">Профиль</a></li>
-                    <li class='{% is_view namespace="chat" %}' id="j-total-notifications"><a href="{% url 'chat:list-view' %}">Сообщения <span class="badge">4</span></a></li>
+                    <li class='{% is_view view_name="home" %}'><a
+                            href="{% url 'home' %}">Гланая</a></li>
+                    <li class='{% is_view namespace="accounts" view_name="profile" %}'>
+                        <a href="{% url 'accounts:profile' 'self' %}">Профиль</a>
+                    </li>
+                    <li class='{% is_view namespace="chat" %}'
+                        id="j-total-notifications"><a
+                            href="{% url 'chat:list-view' %}">Сообщения <span
+                            class="badge">4</span></a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="active">
-                        <form class="form-inline" method="post" action="{% url 'account_logout' %}">
+                        <form class="form-inline" method="post"
+                              action="{% url 'account_logout' %}">
                             {% csrf_token %}
-                            <input class="btn btn-link" type="submit" value="Выход">
+                            <input class="btn btn-link" type="submit"
+                                   value="Выход">
                         </form>
                     </li>
                 </ul>
-             {% else %}
+            {% else %}
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{% url 'account_login' %}">Вход</a></li>
-                    <li><a href="{% url 'account_signup' %}">Регистрация</a></li>
+                    <li><a href="{% url 'account_signup' %}">Регистрация</a>
+                    </li>
                 </ul>
             {% endif %}
         </div><!-- /.nav-collapse -->
@@ -94,13 +103,16 @@
     {% block content %}{% endblock %}
     <hr>
     <footer>
-        <p><script>document.write(new Date().getFullYear())</script>{{ contacts.school }} Велерий Пономаренко, ХАИ</p>
+        <p>
+            <script>document.write(new Date().getFullYear())</script>
+            {{ contacts.school }} Валерий Пономаренко, ХАИ
+        </p>
     </footer>
 </div><!--/.container-->
 
 <script src="{% static 'build/vendor.js' %}"></script>
 <script src="{% static 'build/app.js' %}"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{#<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>#}
 <script>
     $(document).ready(function() {
         {% block jquery %}
