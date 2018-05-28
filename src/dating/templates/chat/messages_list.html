@@ -1,7 +1,7 @@
 <table class="table">
     {% for message in messages %}
     <tr>
-        <td><img class="img-responsive" src="{{ message.author.avatar.url }}"/>
+        <td><a href="{{ message.author.get_absolute_url }}"><img class="img-responsive" src="{{ message.author.avatar.url }}"/></a>
         </td>
         <td>{{ message.content }}
         </td>
