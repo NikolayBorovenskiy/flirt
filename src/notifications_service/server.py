@@ -1,9 +1,17 @@
 import logging
-
+import os
 from tornado.httpserver import HTTPServer
 from tornado import ioloop
 
 log = logging.getLogger('message-delivery')
+
+
+def _setup_env():
+    import site
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'dating.settings.local_settings')
+    site.addsitedir(os.path.dirname(__file__))
+    from django import setup
+    setup()
 
 
 def start_server(app):
@@ -14,6 +22,7 @@ def start_server(app):
 
 
 def main():
+    _setup_env()
     from notifications_service.app import MessageDeliveryApp
     start_server(MessageDeliveryApp())
 

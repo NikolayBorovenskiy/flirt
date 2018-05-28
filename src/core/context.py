@@ -1,10 +1,5 @@
 from logging import warn
 
-# from django.contrib.auth.models import AnonymousUser
-from rest_framework import serializers
-
-empty = serializers.empty
-
 
 class Context:
 
@@ -17,7 +12,7 @@ class Context:
 __global_context = None
 
 
-def acquire(user=None, data_query=empty):
+def acquire(user=None, data_query=None):
     global __global_context
     if __global_context is not None:
         warn("Context already acquired")

@@ -7,8 +7,10 @@ elasticsearch/
 **/static/admin/
 **/build/bundle.js*
 **/build/bundle.css*
+**/static/build/
 *.djcache
 *.whl
+db.sqlite3
 
 .secret
 .idea
@@ -78,5 +80,6 @@ docs/_build/
 
 # PyBuilder
 target/
+src/dating/static/vendor/
 
 !**/static/vendor/**/dist/

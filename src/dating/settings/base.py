@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'django_cleanup',
     'django_countries',
-    'rules.apps.AutodiscoverRulesConfig',
 
     # project apps
     'core',
